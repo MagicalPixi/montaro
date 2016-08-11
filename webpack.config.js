@@ -17,7 +17,7 @@ module.exports = {
     extensions: ['', '.js']
   },
   entry: {
-    main:'./src/index.js'
+    main:'./javascripts/index.js'
   },
   output: {
     path: path.resolve(__dirname, './dist'),
