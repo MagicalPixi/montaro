@@ -19,12 +19,9 @@
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },
-  "resources": [
-  ],
-  "scenes": {
-  },
-  "scenesEdit": [
-  ],
+  "resources": [],
+  "scenes": {},
+  "scenesEdit": [],
   "permission": {},
   "dependencies": {
     "pixi-lib": "^x.x.x"
