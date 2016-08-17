@@ -4,23 +4,22 @@ var loader = require('../loader')
 
 var render = function(renderer) {
   loader.add(resource, 'png').load(function() {
-    
     // Init p2.js
     var world = new p2.World({
-      gravity: [0, 200]
+      gravity: [0, -100]
     });
 
     var boxShape = new p2.Box({ width: 50, height: 50 });
     var boxBody = new p2.Body({
       mass:1,
-      position:[0,2],
-      angularVelocity:1
+      position:[320, 1000],
     });
     boxBody.addShape(boxShape);
     world.addBody(boxBody);
 
     var floor = new p2.Body({
-      
+      angle: Math.PI / 4,
+      position: [0, 1]
     });
     floor.addShape(new p2.Plane());
     world.addBody(floor);
@@ -33,7 +32,8 @@ var render = function(renderer) {
     stage.render = function() {
       world.step(1 / 60)
       graphics.x = boxBody.position[0]
-      graphics.y = boxBody.position[1]
+      graphics.y = 1004 - boxBody.position[1]
+      graphics.rotation = boxBody.angle
     }
   })
 }
