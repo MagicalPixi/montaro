@@ -15,9 +15,21 @@ world.addBody(dogBody);
 var floor = new p2.Body({
   position: [0, 1]
 });
-
-floor.addShape(new p2.Plane());
+var floorShape = new p2.Plane()
+floor.addShape(floorShape);
 world.addBody(floor);
+
+dogShape.material = new p2.Material(dogShape.id)
+floorShape.material = new p2.Material(floorShape.id)
+world.addContactMaterial(
+  new p2.ContactMaterial(
+    dogShape.material, 
+    floorShape.material, 
+    {                
+      restitution : 0.0,            
+    }
+  )
+);
 
 var getY = function(body) {
  return screenHeight - body.position[1]
