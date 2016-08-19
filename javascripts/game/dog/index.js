@@ -1,5 +1,6 @@
 var pixiLib = require('pixi-lib')
-var physics = require('../p2')
+var world = require('../world')
+var Player = require('../physics/player')
 
 var sprite = pixiLib.getMc({
   textures: pixiLib.getTextures('default'),
@@ -11,27 +12,26 @@ var sprite = pixiLib.getMc({
 })
 
 /**
- *  --> p2.js
+ *  --> physics
  **/
-var dogShape = new p2.Box({ width: 100, height: 100 });
-var dogBody = new p2.Body({
-  mass:1,
-  position:[320, 50],
-});
-dogBody.addShape(dogShape);
-physics.world.addBody(dogBody)
+
+var player = new Player({
+  width: 100,
+  height: 100,
+  position: {x: 320, y: 50}
+})
+world.world.addPlayer(player)
 
 /**
  *  --> public method
  **/
 sprite.render = function() {
-  dogBody.position[0] = 320
-  sprite.x = dogBody.position[0]
-  sprite.y = physics.getY(dogBody)
+  sprite.x = player.position.x
+  sprite.y = world.getY(player.position.y)
 }
 
 sprite.jump = function() {
-  dogBody.applyImpulse([0, 1000])
+  player.v.y = 1000
 }
 
 module.exports = sprite

@@ -3,7 +3,7 @@ var pngResource = ['block']
 var stage = new PIXI.Container()
 var loader = require('../loader')
 var blockFactory = require('./block')
-var physics = require('./p2')
+var world = require('./world').world
 
 /**
  *  --> Public Method
@@ -24,8 +24,11 @@ var render = function(renderer) {
     stage.on('touchstart', function() {
       dog.jump()
     })
+    world.on('enemyCollision', function(event) {
+       console.log(event)
+    })
     stage.render = function() {
-      physics.world.step(1 / 60)
+      world.step(1 / 60)
       stage.children.forEach(function(child) {
         if (child.render) {
           child.render()
