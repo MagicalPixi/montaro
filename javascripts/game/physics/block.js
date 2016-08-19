@@ -1,4 +1,5 @@
 var BlockType = {
+  Reward: 'Reward',
   Enemy: 'Enemy',
   Block: 'Block'
 }

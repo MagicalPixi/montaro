@@ -81,6 +81,9 @@ World.prototype.step = function(dt) {
       var result = collision.checkCollision(player, block)
       if (result == collision.CollisionType.EnemyCollision) {
         this.sendEvent(enemyCollisionEvent(player, block))
+      } else if (result == collision.CollisionType.BlockCollisionTop) {
+        player.position.y = block.position.y + (block.height + player.height) / 2
+        player.v.y = 0
       }
     }
   }
