@@ -69,8 +69,8 @@ World.prototype.step = function(dt) {
     player.origin = player.position
     var dx = player.v.x * dt + 0.5 * player.a.x * dt * dt
     var dy = player.v.y * dt + 0.5 * (player.a.y + this.gravity) * dt * dt
-    player.position.x = player.position.x + dx
-    player.position.y = player.position.y + dy
+    var position = {x: player.position.x + dx, y: player.position.y + dy}
+    player.position = position
     if (player.position.y < player.height / 2) {
       player.position.y  = player.height / 2
     }
@@ -78,12 +78,19 @@ World.prototype.step = function(dt) {
     player.v.y = player.v.y + (player.a.y + this.gravity) * dt
     for (var i in this.blocks) {
       var block = this.blocks[i]
-      var result = collision.checkCollision(player, block)
-      if (result == collision.CollisionType.EnemyCollision) {
+      var type = collision.checkCollision(player, block)
+      if (type == collision.CollisionType.EnemyCollision) {
         this.sendEvent(enemyCollisionEvent(player, block))
-      } else if (result == collision.CollisionType.BlockCollisionTop) {
+      } else if (type == collision.CollisionType.BlockCollisionTop) {
         player.position.y = block.position.y + (block.height + player.height) / 2
         player.v.y = 0
+      } else if (type == collision.CollisionType.BlockCollisionBottom) {
+        player.position.y = block.position.y - (block.height + player.height) / 2
+        player.v.y = 0 
+      } else if (type == collision.CollisionType.BlockCollisionLeft) {
+        this.sendEvent(enemyCollisionEvent(player, block))
+      } else if (type == collision.CollisionType.BlockCollisionRight) {
+        this.sendEvent(enemyCollisionEvent(player, block))
       }
     }
   }

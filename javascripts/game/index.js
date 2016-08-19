@@ -25,7 +25,7 @@ var render = function(renderer) {
       dog.jump()
     })
     world.on('enemyCollision', function(event) {
-       console.log(event)
+      console.log({event: event, message: 'game over'})
     })
     stage.render = function() {
       world.step(1 / 60)

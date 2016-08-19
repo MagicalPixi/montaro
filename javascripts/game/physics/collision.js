@@ -30,9 +30,9 @@ var checkBlockCollision = function (player, block) {
   if (Math.abs(dx) <= (player.width + block.width) / 2 && Math.abs(dy) <= (player.height + block.height) / 2) {
     var odx = player.origin.x - block.position.x
     var ody = player.origin.y - block.position.y
-    if (Math.abs(odx) <= (player.width + block.width) / 2 && Math.abs(ody) > (player.height + block.height) / 2) {
+    if (Math.abs(odx) <= (player.width + block.width) / 2 && Math.abs(ody) >= (player.height + block.height) / 2) {
       return dy < 0 ? Type.BlockCollisionBottom : Type.BlockCollisionTop
-    } else if (Math.abs(ody) <= (player.height + block.height) / 2 && Math.abs(odx) > (player.width + block.width) / 2) {
+    } else if (Math.abs(ody) <= (player.height + block.height) / 2 && Math.abs(odx) >= (player.width + block.width) / 2) {
       return dx < 0 ? Type.BlockCollisionLeft : Type.BlockCollisionRight
     }  
   }   
