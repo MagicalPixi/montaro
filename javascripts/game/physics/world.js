@@ -8,24 +8,32 @@ var World = function(option) {
   this.gravity = option.gravity || -10
 }
 
-var addPlayerEvent = {
-  key: 'addPlayer',
-  player: null
+var addPlayerEvent = function(player) {
+  return {
+    key: 'addPlayer',
+    player: player
+  }
 }
 
-var removePlayerEvent = {
-  key: 'removePlayer',
-  player: null
+var removePlayerEvent = function(player) {
+  return {
+    key: 'removePlayer',
+    player: player
+  }
 }
 
-var addBlockEvent = {
-  key: 'addBlock',
-  block: null
+var addBlockEvent = function (block) {
+  return {
+    key: 'addBlock',
+    block: block
+  }
 }
 
-var removeBlockEvent = {
-  key: 'removeBlock',
-  block: null
+var removeBlockEvent = function(block) {
+  return {
+    key: 'removeBlock',
+    block: block
+  }
 }
 
 var enemyCollisionEvent = function(player, enemy) {
@@ -42,23 +50,17 @@ World.prototype.constructor = World
 
 World.prototype.addPlayer = function(player) {
   this.players.push(player)
-  var event = addPlayerEvent
-  event.player = player
-  this.sendEvent(event)
+  this.sendEvent(addPlayerEvent(player))
 }
 
 World.prototype.addBlock = function(block) {
   this.blocks.push(block)
-  var event = addBlockEvent
-  event.block = block
-  this.sendEvent(event)
+  this.sendEvent(addBlockEvent(block))
 }
 
 World.prototype.remoteBlock = function(block) {
   this.blocks.pop(block)
-  var event = removeBlockEvent
-  event.block = block
-  this.sendEvent(event)
+  this.sendEvent(removeBlockEvent(block))
 }
 
 World.prototype.step = function(dt) {
