@@ -4,6 +4,7 @@ var world = new World({
   gravity: -1000
 })
 module.exports = {
+  speed: 2,
   world: world,
   getY: function(y) {
     return screenHeight - y

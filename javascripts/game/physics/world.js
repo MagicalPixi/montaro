@@ -54,11 +54,13 @@ World.prototype.addPlayer = function(player) {
 }
 
 World.prototype.addBlock = function(block) {
+  block.world = this
   this.blocks.push(block)
   this.sendEvent(addBlockEvent(block))
 }
 
 World.prototype.remoteBlock = function(block) {
+  block.world = null
   this.blocks.pop(block)
   this.sendEvent(removeBlockEvent(block))
 }

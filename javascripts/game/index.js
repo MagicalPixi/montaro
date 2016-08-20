@@ -1,15 +1,16 @@
-var jsonResource = ['default']
-var pngResource = ['block']
+var jsonResource = ['default'], pngResource = ['block'], counter = 0
+
 var stage = new PIXI.Container()
 stage.pivot = new PIXI.Point(502, 320)
 stage.x = 320
 stage.y = 502
 stage.rotation = Math.PI / 2
-console.log({width: stage.width, height: stage.height})
 
 var loader = require('../loader')
 var blockFactory = require('./block')
 var world = require('./world').world
+var data = require('./data')
+var blocks = data.blocks(120)
 
 /**
  *  --> Public Method
@@ -23,9 +24,6 @@ var render = function(renderer) {
     dog.play()
     stage.addChild(dog)
 
-    var block = blockFactory(1004, 502 - 50)
-    stage.addChild(block)
-    
     stage.interactive = true;
     stage.on('touchstart', function() {
       dog.jump()
@@ -34,7 +32,13 @@ var render = function(renderer) {
       console.log({event: event, message: 'game over'})
     })
     stage.render = function() {
+      counter ++ 
       world.step(1 / 60)
+      if (counter % 25 === 0) {
+        var i = counter / 25 
+        var number = blocks[i]
+        addBlock(number)
+      }
       stage.children.forEach(function(child) {
         if (child.render) {
           child.render()
@@ -48,8 +52,12 @@ var render = function(renderer) {
 /**
  * --> Private Method
  **/
-var generateBlock = function() {
-  
+var addBlock = function(count) {
+  console.log(count)
+  for (var i = 0; i < count; i++) {
+    var block = blockFactory(1004, 50 + i * 100)
+    stage.addChild(block)
+  }
 }
 
  
