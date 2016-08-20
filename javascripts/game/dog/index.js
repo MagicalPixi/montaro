@@ -7,7 +7,7 @@ var sprite = pixiLib.getMc({
   "anchor.x": 0.5,
   "anchor.y": 0.5,
   x: 20,
-  y: 900,
+  y: 500,
   animationSpeed: 0.1
 })
 

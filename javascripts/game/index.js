@@ -1,6 +1,12 @@
 var jsonResource = ['default']
 var pngResource = ['block']
 var stage = new PIXI.Container()
+stage.pivot = new PIXI.Point(502, 320)
+stage.x = 320
+stage.y = 502
+stage.rotation = Math.PI / 2
+console.log({width: stage.width, height: stage.height})
+
 var loader = require('../loader')
 var blockFactory = require('./block')
 var world = require('./world').world
@@ -17,7 +23,7 @@ var render = function(renderer) {
     dog.play()
     stage.addChild(dog)
 
-    var block = blockFactory(500, 1004 - 50)
+    var block = blockFactory(1004, 502 - 50)
     stage.addChild(block)
     
     stage.interactive = true;

@@ -1,4 +1,4 @@
-var screenHeight = 1004
+var screenHeight = 640
 var World = require('./physics').World
 var world = new World({
   gravity: -1000
