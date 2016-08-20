@@ -53,7 +53,6 @@ var render = function(renderer) {
  * --> Private Method
  **/
 var addBlock = function(count) {
-  console.log(count)
   for (var i = 0; i < count; i++) {
     var block = blockFactory(1004, 50 + i * 100)
     stage.addChild(block)

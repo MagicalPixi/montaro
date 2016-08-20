@@ -24,7 +24,7 @@ var blockFactory = function(x, y) {
     sprite.y = world.getY(block.position.y)
     if (sprite.x < 0) {
       sprite.parent.removeChild(sprite)
-      block.world.remoteBlock(block)
+      block.world.removeBlock(block)
     }
   }
   return sprite

@@ -1,5 +1,6 @@
 var Oberver = require('./observer')
 var collision = require('./collision')
+var Block = require('./block')
 
 var World = function(option) {
   option = option || {}
@@ -44,6 +45,14 @@ var enemyCollisionEvent = function(player, enemy) {
   }
 }
 
+var rewardCollisionEvent = function(player, reward) {
+  return {
+    key: 'rewardCollision',
+    player: player,
+    reward: reward
+  }
+}
+
 World.prototype = new Object(Oberver.prototype)
 
 World.prototype.constructor = World
@@ -59,9 +68,12 @@ World.prototype.addBlock = function(block) {
   this.sendEvent(addBlockEvent(block))
 }
 
-World.prototype.remoteBlock = function(block) {
+World.prototype.removeBlock = function(block) {
   block.world = null
-  this.blocks.pop(block)
+  var i = this.blocks.indexOf(block)
+  if (i != -1) {
+    this.blocks.splice(i, 1)
+  }
   this.sendEvent(removeBlockEvent(block))
 }
 
@@ -78,23 +90,48 @@ World.prototype.step = function(dt) {
     }
     player.v.x = player.v.x + player.a.x * dt
     player.v.y = player.v.y + (player.a.y + this.gravity) * dt
-    for (var i in this.blocks) {
-      var block = this.blocks[i]
-      var type = collision.checkCollision(player, block)
-      if (type == collision.CollisionType.EnemyCollision) {
-        this.sendEvent(enemyCollisionEvent(player, block))
-      } else if (type == collision.CollisionType.BlockCollisionTop) {
-        player.position.y = block.position.y + (block.height + player.height) / 2
-        player.v.y = 0
-      } else if (type == collision.CollisionType.BlockCollisionBottom) {
-        player.position.y = block.position.y - (block.height + player.height) / 2
-        player.v.y = 0 
-      } else if (type == collision.CollisionType.BlockCollisionLeft) {
-        this.sendEvent(enemyCollisionEvent(player, block))
-      } else if (type == collision.CollisionType.BlockCollisionRight) {
-        this.sendEvent(enemyCollisionEvent(player, block))
+    var result = checkEnemyCollision(this, this.blocks, player)
+    if (result.enemy) {
+      this.sendEvent(enemyCollisionEvent(player, result.enemy))
+    } else {
+      if (result.topBlock && result.bottomBlock){
+        if (collision.checkBottomCollision(player, result.topBlock)) {
+          player.position.y = result.topBlock.position.y + (result.topBlock.height + player.height) / 2
+          player.v.y = 0
+        } else if (collision.checkTopCollision(player, result.bottomBlock)) {
+          player.position.y = result.bottomBlock.position.y - (result.bottomBlock.height + player.height) / 2
+          player.v.y = 0
+        }
       }
     }
+  }
+}
+
+var checkEnemyCollision = function(world, blocks, player) {
+  var enemy = null
+  var topBlock = null
+  var bottomBlock = null
+  for (var i in blocks) {
+    var current = blocks[i]
+    if (current.position.x < player.position.x + player.width && current.position.x >= player.position.x - current.width) {
+      if (!topBlock || current.position.y >= topBlock.position.y) topBlock = current
+      if (!bottomBlock || current.position.y <= bottomBlock.position.y) bottomBlock = current
+    }
+    if (current.type == Block.BlockType.Reward) {
+      if (collision.checkEnemyCollision(player, current)) {
+        world.sendEvent(rewardCollisionEvent(player, current))
+      }
+    } else {
+      if (collision.checkEnemyCollision(player, current)) {
+        enemy = current
+        break
+      }
+    }
+  }
+  return {
+    enemy: enemy,
+    topBlock: topBlock,
+    bottomBlock: bottomBlock
   }
 }
 
