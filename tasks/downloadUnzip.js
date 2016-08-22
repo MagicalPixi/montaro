@@ -10,7 +10,7 @@ var unzip = require('gulp-unzip');
 var fs = require('fs');
 var spawn = require('child_process').spawn;
 
-var __DEBUG__ = require('./../env').__DEBUG__;
+var __DEBUG__ = require('./env').__DEBUG__;
 
 var downloadZip = require('./lib/downloadZip');
 var unzipDownload = require('./lib/unzipDownload');
@@ -36,7 +36,7 @@ var filesInZip = [
   '*.png'
 ];
 
-var saveSpritesDir = path.resolve(__dirname,'../image/');
+var saveSpritesDir = path.resolve(__dirname,'../images/');
 
 if(!fs.existsSync(saveSpritesDir)){
   fs.mkdirSync(saveSpritesDir);

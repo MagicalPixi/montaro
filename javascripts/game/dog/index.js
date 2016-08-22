@@ -2,13 +2,13 @@ var pixiLib = require('pixi-lib')
 var world = require('../world')
 var Player = require('../physics/player')
 
-var sprite = pixiLib.getMc({
-  textures: pixiLib.getTextures('default'),
+var dogFn = require('../../../images/dog');
+
+var sprite = dogFn({
   "anchor.x": 0.5,
   "anchor.y": 0.5,
   x: 20,
   y: 500,
-  animationSpeed: 0.1
 })
 
 /**

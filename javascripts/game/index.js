@@ -1,4 +1,4 @@
-var jsonResource = ['default'],
+var jsonResource = ['default','dog'],
   pngResource = ['bg','bg2','block'],
   counter = 0;
 
