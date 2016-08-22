@@ -5,6 +5,7 @@ var Player = function(option) {
   this.position = option.position || {x: 0, y: 0},
   this.v = option.v || {x: 0, y: 0}
   this.a = option.a || {x: 0, y: 0}
+  this.inland = false
 }
 
 module.exports = Player

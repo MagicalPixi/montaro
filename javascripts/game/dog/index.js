@@ -31,7 +31,7 @@ sprite.render = function() {
 }
 
 sprite.jump = function() {
-  player.v.y = 500
+    if (player.inland) player.v.y = 500
 }
 
 module.exports = sprite

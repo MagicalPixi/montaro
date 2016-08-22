@@ -7,6 +7,7 @@ var World = function(option) {
   this.players = []
   this.blocks = []
   this.gravity = option.gravity || -10
+  this.land = option.land || 0
 }
 
 var addPlayerEvent = function(player) {
@@ -80,6 +81,7 @@ World.prototype.removeBlock = function(block) {
 World.prototype.step = function(dt) {
   for (var index in this.players) {
     var player = this.players[index]
+    player.inland = false
     player.origin = player.position
     var dx = player.v.x * dt + 0.5 * player.a.x * dt * dt
     var dy = player.v.y * dt + 0.5 * (player.a.y + this.gravity) * dt * dt
@@ -87,6 +89,7 @@ World.prototype.step = function(dt) {
     player.position = position
     if (player.position.y < player.height / 2) {
       player.position.y  = player.height / 2
+      player.inland = true
     }
     player.v.x = player.v.x + player.a.x * dt
     player.v.y = player.v.y + (player.a.y + this.gravity) * dt
@@ -97,6 +100,7 @@ World.prototype.step = function(dt) {
       if (result.topBlock && result.bottomBlock){
         if (collision.checkBottomCollision(player, result.topBlock)) {
           player.position.y = result.topBlock.position.y + (result.topBlock.height + player.height) / 2
+          player.inland = true
           player.v.y = 0
         } else if (collision.checkTopCollision(player, result.bottomBlock)) {
           player.position.y = result.bottomBlock.position.y - (result.bottomBlock.height + player.height) / 2
