@@ -9,8 +9,11 @@ var taskList = fs.readdirSync(tasksPath).map(function (taskName) {
 }).filter(function (p) {
   return !fs.lstatSync(p).isDirectory();
 }).forEach(function(p){
+  console.log(p);
   var taskFn = require(p);
-  taskFn(gulp);
+  if(typeof taskFn === 'function'){
+    taskFn(gulp);
+  }
 });
 
 module.exports = gulp;

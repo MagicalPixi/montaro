@@ -1,1 +1,1 @@
-module.exports = { __DEBUG__:false };
+module.exports = { __DEBUG__:true };

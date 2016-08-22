@@ -36,7 +36,7 @@ var filesInZip = [
   '*.png'
 ];
 
-var saveSpritesDir = path.resolve(__dirname,'../src/sprites/');
+var saveSpritesDir = path.resolve(__dirname,'../image/');
 
 if(!fs.existsSync(saveSpritesDir)){
   fs.mkdirSync(saveSpritesDir);

@@ -1,10 +1,16 @@
-var jsonResource = ['default'], pngResource = ['block'], counter = 0
+var jsonResource = ['default'],
+  pngResource = ['bg','bg2','block'],
+  counter = 0;
 
 var stage = new PIXI.Container()
 stage.pivot = new PIXI.Point(502, 320)
 stage.x = 320
 stage.y = 502
 stage.rotation = Math.PI / 2
+
+
+window.W = 1004;
+window.H = 640;
 
 var loader = require('../loader')
 var blockFactory = require('./block')
