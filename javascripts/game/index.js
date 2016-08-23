@@ -15,8 +15,6 @@ window.H = 640;
 var loader = require('../loader')
 var blockFactory = require('./block')
 var world = require('./world').world
-var data = require('./data')
-var blocks = data.blocks(120)
 
 /**
  *  --> Public Method
@@ -40,10 +38,9 @@ var render = function(renderer) {
     stage.render = function() {
       counter ++ 
       world.step(1 / 60)
-      if (counter % 25 === 0) {
+      if (counter % 60 === 0) {
         var i = counter / 25 
-        var number = blocks[i]
-        addBlock(number)
+        addBlock(counter)
       }
       stage.children.forEach(function(child) {
         if (child.render) {
@@ -59,8 +56,10 @@ var render = function(renderer) {
  * --> Private Method
  **/
 var addBlock = function(count) {
-  for (var i = 0; i < count; i++) {
-    var block = blockFactory(1004, 50 + i * 100)
+  var block = blockFactory({
+    i:count,
+  })
+  if(block){
     stage.addChild(block)
   }
 }

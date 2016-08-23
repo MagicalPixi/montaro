@@ -16,8 +16,8 @@ var sprite = dogFn({
  **/
 
 var player = new Player({
-  width: 100,
-  height: 100,
+  width: sprite.width,
+  height: sprite.height,
   position: {x: 320, y: 50}
 })
 world.world.addPlayer(player)
