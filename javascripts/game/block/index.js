@@ -33,7 +33,7 @@ function getCoordinateByPosition(p) {
   var  m = {
     low:{
       x:1004,
-      y:90
+      y:57
     },
     middle:{
       x:1004,
@@ -69,8 +69,8 @@ var blockFactory = function(arg) {
 
   var sprite = pixiLib.getIm({
     textures: pixiLib.getTextures('block'),
-    "anchor.x": 0.05,
-    "anchor.y": 0.05,
+    "anchor.x": 0.5,
+    "anchor.y": 0.5,
     x: x,
     y: world.getY(y),
   });
