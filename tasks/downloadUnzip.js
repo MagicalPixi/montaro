@@ -17,7 +17,7 @@ var unzipDownload = require('./lib/unzipDownload');
 
 var packageJsonPath = path.resolve(__dirname,'../package.json');
 
-var server = __DEBUG__ ? 'http://localhost:1414/' :  'http://www.magicalpixi.com/';
+var server = __DEBUG__ ? 'http://localhost:1414/' :  'http://back.magicalpixi.com/';
 //资源名字
 var downloadMaterialNames = [];
 //var downloadMaterialNames = [
