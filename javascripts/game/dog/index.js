@@ -7,8 +7,8 @@ var dogFn = require('../../../images/dog');
 var sprite = dogFn({
   "anchor.x": 0.5,
   "anchor.y": 0.5,
-  x: 20,
-  y: 500,
+  x: 320,
+  y: 80,
 })
 
 /**
@@ -18,7 +18,7 @@ var sprite = dogFn({
 var player = new Player({
   width: sprite.width,
   height: sprite.height,
-  position: {x: 320, y: 50}
+  position: {x: 320, y: 80}
 })
 world.world.addPlayer(player)
 
