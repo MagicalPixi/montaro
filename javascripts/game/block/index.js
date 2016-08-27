@@ -13,7 +13,7 @@ function blockFnWrapper(p) {
       position:p
     });
   }
-};
+}
 
 function empty() {
   return false;
@@ -52,7 +52,9 @@ window.ur = unzipRoadArr;
 
 function blockManager() {
 
-  return unzipRoadArr[index++]() || false;
+  var func = unzipRoadArr[index++];
+
+  return  func ? func() : console.error('到终点了');
 }
 
 module.exports = blockManager;

@@ -20,6 +20,15 @@
     "webpack-dev-server": "^1.14.1"
   },
   "resources": [
+    "building0",
+    "building1",
+    "building2",
+    "building3",
+    "building4",
+    "tree",
+    "cloud",
+    "cloudSun",
+    "bush"
   ],
   "scenes": {},
   "scenesEdit": [],

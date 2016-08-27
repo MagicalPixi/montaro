@@ -1,7 +1,8 @@
 var screenHeight = 640
 var World = require('./physics').World
 var world = new World({
-  gravity: -1000
+  gravity: -1000,
+  land:110,
 })
 module.exports = {
   speed: 2,

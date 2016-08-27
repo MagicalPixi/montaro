@@ -11,7 +11,7 @@ module.exports = function (arg) {
 
   var x = 1004,y = 60;
 
-  sp.x = sp.initX = x
+  sp.x = sp.initX = x;
   sp.y = sp.initY = world.getY(y);
   sp.scale.x = sp.scale.y = 0.4;
 

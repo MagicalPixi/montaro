@@ -24,52 +24,62 @@ var world = require('./world').world
  *  --> Public Method
  **/
 var render = function (renderer) {
-  loader.add(jsonResource, 'json').add(pngResource, 'png').load(function () {
-    var blockFactory = require('./block');
+  loader.add(jsonResource, 'json')
+    .add(pngResource, 'png')
+    .load(function () {
 
-    /**
-     * --> Private Method
-     **/
-    var addBlock = function (count) {
-      var block = blockFactory({
-        i: count,
-      });
-      if (block) {
-        stage.addChild(block)
-      }
-    }
+      var goldFn = require('../../images/gold');
 
-    var background = require('./background')
-    stage.addChild(background)
+      var blockFactory = require('./block');
 
-    var dog = require('./dog')
-    dog.play()
-    stage.addChild(dog)
 
-    stage.interactive = true;
-    stage.on('touchstart', function () {
-      dog.jump()
-    })
-    world.on('enemyCollision', function (event) {
-      console.log({event: event, message: 'game over'})
-    })
-    stage.render = function () {
-      counter++
-      world.step(1 / 60)
-      if (counter % 60 === 0) {
-        var i = counter / 25
-        addBlock(counter)
-      }
-      stage.children.forEach(function (child) {
-        if (child.render) {
-          child.render()
+      /**
+       * --> Private Method
+       **/
+      var addBlock = function (count) {
+        var block = blockFactory({
+          i: count,
+        });
+        if (block) {
+          stage.addChild(block)
         }
-      })
-    }
-    renderer(stage)
-  })
-}
+      }
 
+      var road = require('./road');
+      stage.addChild(road);
+
+      var dog = require('./dog')
+      dog.play()
+
+      stage.addChild(dog)
+
+
+      stage.addChild(goldFn())
+
+      stage.interactive = true;
+      stage.on('touchstart', function () {
+        dog.jump()
+      })
+      world.on('enemyCollision', function (event) {
+        console.log({event: event, message: 'game over'})
+      })
+      stage.render = function () {
+        counter++
+        world.step(1 / 60)
+        if (counter % 60 === 0) {
+          var i = counter / 25
+          addBlock(counter)
+        }
+        stage.children.forEach(function (child) {
+          if (child.render) {
+            child.render()
+          }
+        })
+      }
+
+      renderer(stage)
+    })
+}
 
 
 module.exports = render
