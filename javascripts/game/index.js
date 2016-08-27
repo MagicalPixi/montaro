@@ -4,7 +4,19 @@ var jsonResource = [
     'car',
   ],
   pngResource = [
-    'bg', 'bg2', 'block'],
+    'bg',
+    'bg2',
+    'block',
+    'building0',
+    'building1',
+    'building2',
+    'building3',
+    'building4',
+    'bush',
+    'tree',
+    'cloud',
+    'cloudSun'
+  ],
   counter = 0;
 
 var stage = new PIXI.Container()
@@ -31,17 +43,18 @@ var render = function (renderer) {
       var goldFn = require('../../images/gold');
 
       var blockFactory = require('./block');
-
+      var backgroundFn = require('./background')
 
       /**
        * --> Private Method
        **/
       var addBlock = function (count) {
-        var block = blockFactory({
-          i: count,
-        });
-        if (block) {
+        var block = blockFactory();
+        var building = backgroundFn();
+
+        if (block && building) {
           stage.addChild(block)
+          stage.addChild(building)
         }
       }
 
@@ -52,7 +65,6 @@ var render = function (renderer) {
       dog.play()
 
       stage.addChild(dog)
-
 
       stage.addChild(goldFn())
 

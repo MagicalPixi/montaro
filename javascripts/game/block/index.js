@@ -3,6 +3,7 @@
  */
 var _ = require('lodash');
 var repeat = require('pixi-lib').utils.repeat;
+var unfoldArray = require('pixi-lib').utils.unfoldArray;
 
 var carFn = require('../../../images/car');
 var blockFn = require('../../../images/block');
@@ -29,26 +30,9 @@ var roadArr = repeat([
   carFn,
 ],10);
 
-function unzipArr(fromArr,arr) {
-  if(fromArr.length > 0){
-    var v = fromArr[0];
 
-    if(_.isArray(v)){
-      var unV = unzipArr(v,[]);
-      arr = arr.concat(unV);
-    }else{
-      arr = arr.concat(v);
-    }
-    return unzipArr(fromArr.slice(1),arr);
-  }else{
-    return arr;
-  }
-}
-
-var unzipRoadArr = unzipArr(roadArr,[]);
+var unzipRoadArr = unfoldArray(roadArr,[]);
 var index = 0;
-
-window.ur = unzipRoadArr;
 
 function blockManager() {
 
