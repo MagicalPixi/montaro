@@ -87,8 +87,8 @@ World.prototype.step = function(dt) {
     var dy = player.v.y * dt + 0.5 * (player.a.y + this.gravity) * dt * dt
     var position = {x: player.position.x + dx, y: player.position.y + dy}
     player.position = position
-    if (player.position.y < player.height / 2) {
-      player.position.y  = player.height / 2
+    if (player.position.y < player.height / 2 + this.land) {
+      player.position.y  = player.height / 2 + this.land;
       player.inland = true
     }
     player.v.x = player.v.x + player.a.x * dt

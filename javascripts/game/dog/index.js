@@ -8,7 +8,7 @@ var sprite = dogFn({
   "anchor.x": 0.5,
   "anchor.y": 0.5,
   x: 320,
-  y: 80,
+  y: 200,
 })
 
 /**
@@ -18,7 +18,7 @@ var sprite = dogFn({
 var player = new Player({
   width: sprite.width,
   height: sprite.height,
-  position: {x: 320, y: 80}
+  position: {x: 320, y: 200}
 })
 world.world.addPlayer(player)
 
@@ -31,7 +31,7 @@ sprite.render = function() {
 }
 
 sprite.jump = function() {
-    if (player.inland) player.v.y = 500
+    if (player.inland) player.v.y = 1500
 }
 
 module.exports = sprite

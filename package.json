@@ -34,6 +34,6 @@
   "scenesEdit": [],
   "permission": {},
   "dependencies": {
-    "pixi-lib": "^x.x.x"
+    "pixi-lib": "^1.23.1"
   }
 }
