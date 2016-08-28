@@ -3,12 +3,14 @@ var bgFn2 = require('../../../images/bg2');
 
 var roadFn = require('../../../images/road')
 
+var groupFn = require('../background/group')
+
 //生成背景
-function repeatBackground() {
+function repeatBackground(spriteFn) {
   var num = 3;
   var arr = [];
 
-  var fns = [roadFn];
+  var fns = [spriteFn];
 
   function build(fn, i) {
 
@@ -40,11 +42,19 @@ function repeatBackground() {
 var stage = new PIXI.Container();
 stage.speed = 2;
 
-var bgs = repeatBackground()
+var bgs = repeatBackground(roadFn)
 
 bgs.map(function (bg) {
   stage.addChild(bg);
 });
+
+
+var buildings = repeatBackground(groupFn);
+
+buildings.map(function (b) {
+  b.y = 0;
+  stage.addChild(b);
+})
 
 
 stage.setSpeed = function (s) {
@@ -52,12 +62,14 @@ stage.setSpeed = function (s) {
 }
 
 stage.render = function () {
-  bgs.map(function (bg) {
+  [].concat(bgs).concat(buildings).map(function (bg) {
     bg.x -= stage.speed;
     if(bg.x <= bg.sideX){
       bg.x = bg.initX;
     }
   });
+
+
 }
 
 module.exports = stage;

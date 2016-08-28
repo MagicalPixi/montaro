@@ -43,19 +43,21 @@ var render = function (renderer) {
       var goldFn = require('../../images/gold');
 
       var blockFactory = require('./block');
-      var backgroundFn = require('./background')
+      // var backgroundFn = require('./background')
 
       /**
        * --> Private Method
        **/
       var addBlock = function (count) {
         var block = blockFactory();
-        var building = backgroundFn();
+        // var building = backgroundFn();
 
-        if (block && building) {
+        if (block) {
           stage.addChild(block)
-          stage.addChild(building)
         }
+        // if(building){
+        //   stage.addChild(building)
+        // }
       }
 
       var road = require('./road');
