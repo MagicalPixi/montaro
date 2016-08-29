@@ -6,15 +6,15 @@ function getCoordinateByPosition(p) {
   var  m = {
     low:{
       x:1004,
-      y:57
+      y:147
     },
     middle:{
       x:1004,
-      y:180
+      y:200
     },
     high:{
       x:1004,
-      y:290
+      y:240
     },
   };
 
@@ -41,7 +41,7 @@ var blockFactory = function(arg) {
   position = getCoordinateByPosition(position);
 
   if(!position){
-    throw new Error('no p')
+    throw new Error('no po')
   }
 
   var x = position.x;
@@ -51,6 +51,8 @@ var blockFactory = function(arg) {
     textures: pixiLib.getTextures('block'),
     "anchor.x": 0.5,
     "anchor.y": 0.5,
+    "scale.x" : 0.5,
+    "scale.y" : 0.5,
     x: x,
     y: world.getY(y),
   });
