@@ -40,6 +40,15 @@ var render = function (renderer) {
     .add(pngResource, 'png')
     .load(function () {
 
+      var directionButtonFn = require('../../images/directionButton');
+      var upButton = directionButtonFn()
+      upButton.x = 10;
+      upButton.y = 640 - 220;
+
+      var downButton = directionButtonFn();
+      downButton.x = 10;
+      downButton.y = 640 - 110;
+
       var goldFn = require('../../images/gold');
 
       var blockFactory = require('./block');
@@ -48,12 +57,12 @@ var render = function (renderer) {
       /**
        * --> Private Method
        **/
-      var addBlock = function (count) {
+      function addBlock(count) {
         var block = blockFactory();
         // var building = backgroundFn();
 
         if (block) {
-          stage.addChild(block)
+          stage.addChildAt(block,3)
         }
         // if(building){
         //   stage.addChild(building)
@@ -64,16 +73,36 @@ var render = function (renderer) {
       stage.addChild(road);
 
       var dog = require('./dog')
-      dog.play()
+
+      window.dog = dog;
 
       stage.addChild(dog)
 
       stage.addChild(goldFn())
 
       stage.interactive = true;
-      stage.on('touchstart', function () {
-        dog.jump()
+
+      stage.addChild(upButton)
+      stage.addChild(downButton)
+
+      upButton.on('touchstart',function (e) {
+        dog.up();
+
+        e.data.originalEvent.stopPropagation()
+      });
+
+      downButton.on('touchstart',function (e) {
+        dog.down()
+
+        e.data.originalEvent.stopPropagation()
       })
+
+      // stage.on('touchstart', function () {
+      // });
+      document.body.ontouchstart = function () {
+        dog.jump()
+      };
+
       world.on('enemyCollision', function (event) {
         console.log({event: event, message: 'game over'})
       })
@@ -90,6 +119,7 @@ var render = function (renderer) {
           }
         })
       }
+
 
       renderer(stage)
     })

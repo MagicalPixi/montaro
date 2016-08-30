@@ -11,6 +11,7 @@ var sprite = dogFn({
   y: 200,
 })
 
+
 /**
  *  --> physics
  **/
@@ -29,9 +30,36 @@ sprite.render = function() {
   sprite.x = player.position.x
   sprite.y = world.getY(player.position.y)
 }
+sprite.play();
 
-sprite.jump = function() {
-    if (player.inland) player.v.y = 1500
+
+
+var upY = -55;
+var downY = 55;
+var distance = 55;
+
+var container = new PIXI.Container();
+container.y = 0;
+
+container.jump = function () {
+  if (player.inland){
+    player.v.y = 1500
+  }
+};
+
+container.up = function () {
+  if(this.y > upY){
+    this.y -= distance;
+  }
+}
+container.down = function () {
+  if(this.y <  downY){
+    this.y += distance
+  }
 }
 
-module.exports = sprite
+container.addChild(sprite);
+
+container.render = sprite.render.bind(sprite)
+
+module.exports = container

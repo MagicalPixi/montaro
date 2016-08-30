@@ -9,7 +9,7 @@ module.exports = function (arg) {
 
   var sp = mySpriteFn({})
 
-  var x = 894,y = 170;
+  var x = 1004,y = 170;
 
   sp.x = sp.initX = x;
   sp.y = sp.initY = world.getY(y);
