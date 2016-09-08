@@ -5,6 +5,10 @@ var _ = require('lodash');
 var repeat = require('pixi-lib').utils.repeat;
 var unfoldArray = require('pixi-lib').utils.unfoldArray;
 
+var fn = require('./fn');
+var addChildren = fn.addChildren;
+var arrFn = fn.arrFn;
+
 var building0 = require('../../../images/building0');
 var building1 = require('../../../images/building1');
 var building2 = require('../../../images/building2');
@@ -21,34 +25,6 @@ var roadFn = require('../../../images/road');
 var maxY = 640 - roadFn.roadHeight;
 
 
-function arrFn(argsFn) {
-
-  return function () {
-
-    var args = argsFn();
-
-    var arr = args[0], fn = args[1];
-
-    var fnArr = [].concat(fn);
-
-    return arr.map(function (arg, i) {
-
-      return fnArr[i % fnArr.length](arg);
-    })
-  }
-}
-
-function addChildren(stage, childrenFn) {
-  childrenFn().map(function (c) {
-
-    if (!c.y) {
-      c.y = maxY;
-      c.anchor.y = 1;
-    }
-
-    stage.addChild(c);
-  })
-}
 
 function cloudFn() {
 
@@ -165,10 +141,10 @@ function buildingFn() {
 module.exports = function () {
   var stage = new PIXI.Container();
 
-  addChildren(stage, arrFn(cloudFn))
-  addChildren(stage, arrFn(buildingFn))
-  addChildren(stage, arrFn(bushesFn))
-  addChildren(stage, arrFn(treesFn))
+  addChildren(stage, arrFn(cloudFn),maxY)
+  addChildren(stage, arrFn(buildingFn),maxY)
+  addChildren(stage, arrFn(bushesFn),maxY)
+  addChildren(stage, arrFn(treesFn),maxY)
 
   return stage;
 };

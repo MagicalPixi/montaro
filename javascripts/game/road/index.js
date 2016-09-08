@@ -7,7 +7,7 @@ var groupFn = require('../background/group')
 
 //生成背景
 function repeatBackground(spriteFn) {
-  var num = 3;
+  var num = 1;
   var arr = [];
 
   var fns = [spriteFn];
@@ -31,7 +31,7 @@ function repeatBackground(spriteFn) {
 
     arr.push(bg);
   }
-
+  //补尾部
   arr.push(build(fns[0],num));
 
 
@@ -68,8 +68,6 @@ stage.render = function () {
       bg.x = bg.initX;
     }
   });
-
-
 }
 
 module.exports = stage;
