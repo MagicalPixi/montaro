@@ -20,7 +20,17 @@
     "webpack-dev-server": "^1.14.1"
   },
   "resources": [
-    "cloudSun"
+    "greenHill",
+    "greenMountains",
+    "westLakeLantern",
+    "westLakeHydrant",
+    "groupBuildings",
+    "smokeShop",
+    "platformChair",
+    "westLakeBridgeWave",
+    "westLakeBridgeApproache",
+    "westLakeBridge",
+    "westLakeMansion"
   ],
   "scenes": {},
   "scenesEdit": [],
