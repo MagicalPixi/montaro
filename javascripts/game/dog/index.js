@@ -3,12 +3,13 @@ var world = require('../world')
 var Player = require('../physics/player')
 
 var dogFn = require('../../../images/dog');
+var roadFn = require('../../../images/road')
 
 var sprite = dogFn({
   "anchor.x": 0.5,
   "anchor.y": 0.5,
   x: 320,
-  y: 200,
+  y: 0,
 })
 
 
@@ -19,7 +20,7 @@ var sprite = dogFn({
 var player = new Player({
   width: sprite.width,
   height: sprite.height,
-  position: {x: 320, y: 200}
+  position: {x: 320, y: 0}
 })
 world.world.addPlayer(player)
 
@@ -27,7 +28,7 @@ world.world.addPlayer(player)
  *  --> public method
  **/
 sprite.render = function() {
-  sprite.x = player.position.x
+  sprite.x = player.position.x;
   sprite.y = world.getY(player.position.y)
 }
 sprite.play();

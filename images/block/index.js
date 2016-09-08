@@ -2,19 +2,25 @@ var pixiLib = require('pixi-lib')
 var world = require('../../javascripts/game/world')
 var Block = require('../../javascripts/game/physics/index').Block
 
+var roadFn = require('../road')
+
 function getCoordinateByPosition(p) {
+
+
+  var h = 35; //anchor.y = 0.5 折算高度
+
   var  m = {
     low:{
       x:1004,
-      y:147
+      y:roadFn.roadBaseHeight + h
     },
     middle:{
       x:1004,
-      y:200
+      y:roadFn.roadBaseHeight + h
     },
     high:{
       x:1004,
-      y:240
+      y:roadFn.roadBaseHeight + h
     },
   };
 

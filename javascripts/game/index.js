@@ -99,9 +99,10 @@ var render = function (renderer) {
 
       // stage.on('touchstart', function () {
       // });
-      document.body.ontouchstart = function () {
+      document.body.addEventListener('touchstart',function () {
         dog.jump()
-      };
+        console.log('jump')
+      });
 
       world.on('enemyCollision', function (event) {
         console.log({event: event, message: 'game over'})

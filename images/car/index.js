@@ -4,18 +4,20 @@ var pixiLib = require('pixi-lib')
 var world = require('../../javascripts/game/world')
 var Block = require('../../javascripts/game/physics/index').Block
 
+var roadFn = require('../road');
 
 module.exports = function (arg) {
 
   var sp = mySpriteFn({})
 
-  var x = 1004,y = 170;
-
-  sp.x = sp.initX = x;
-  sp.y = sp.initY = world.getY(y);
   sp.scale.x = sp.scale.y = 0.4;
 
   sp.anchor.x = sp.anchor.y = 0.5;
+
+  var x = 1004,y = roadFn.roadBaseHeight + sp.height * sp.anchor.y;
+
+  sp.x = sp.initX = x;
+  sp.y = sp.initY = world.getY(y);
 
   var myBlock = new Block({
     width:sp.width,

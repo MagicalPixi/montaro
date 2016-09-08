@@ -6,8 +6,7 @@ var roadBaseWidth = 1004;
 
 var grassHeight = 15;
 var grassHeight2 = 30;
-var roadBaseHeight = 220;
-
+var roadBaseHeight = 96;
 
 
 function roadBaseFn() {
@@ -58,24 +57,34 @@ function roadDarkLine() {
   return line;
 }
 
-module.exports = function () {
+function roadFn(ignoreLine) {
 
   var container = new PIXI.Container();
 
   container.addChild(roadBaseFn())
-  
-  var i = 0;
-  var lines = [roadLightLine,roadDarkLine];
-  
-  while ((i * 70) < roadBaseWidth){
 
-    var line = lines[i%2]();
-    line.x = (i*70);
+  if(ignoreLine) {
+    var i = 0;
+    var lines = [roadLightLine, roadDarkLine];
 
-    container.addChild(line);
+    while ((i * 70) < roadBaseWidth) {
 
-    i++;
+      var line = lines[i % 2]();
+      line.x = (i * 70);
+
+      container.addChild(line);
+
+      i++;
+    }
   }
-  
+
   return container;
 }
+
+roadFn.grassHeight = grassHeight;
+roadFn.grassHeight2 = grassHeight2;
+roadFn.roadBaseHeight = roadBaseHeight;
+
+roadFn.roadHeight = roadBaseHeight + grassHeight + grassHeight2;
+
+module.exports = roadFn;

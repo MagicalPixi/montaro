@@ -16,7 +16,9 @@ var cloudSun = require('../../../images/cloudSun');
 var tree = require('../../../images/tree');
 
 
-var maxY = 640 - 265;
+var roadFn = require('../../../images/road');
+
+var maxY = 640 - roadFn.roadHeight;
 
 
 function arrFn(argsFn) {

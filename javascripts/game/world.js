@@ -1,8 +1,11 @@
 var screenHeight = 640
 var World = require('./physics').World
+
+var roadFn = require('../../images/road')
+
 var world = new World({
   gravity: -4000,
-  land:110,
+  land:roadFn.roadBaseHeight,
 })
 module.exports = {
   speed: 2,
