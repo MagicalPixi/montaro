@@ -2,6 +2,7 @@ var jsonResource = [
     'default',
     'dog',
     'car',
+    'cat'
   ],
   pngResource = [
     'bg',

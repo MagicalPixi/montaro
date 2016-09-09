@@ -2,7 +2,7 @@ var pixiLib = require('pixi-lib')
 var world = require('../world')
 var Player = require('../physics/player')
 
-var dogFn = require('../../../images/dog');
+var dogFn = require('../../../images/cat');
 var roadFn = require('../../../images/road')
 
 var sprite = dogFn({
