@@ -32,7 +32,7 @@ module.exports = function (arg) {
   world.world.addBlock(myBlock);
 
   sp.render = function () {
-    myBlock.position.x -= world.speed * 2
+    myBlock.position.x -= world.speed * 2.5
     sp.x = myBlock.position.x
     sp.y = world.getY(myBlock.position.y);
 

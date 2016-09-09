@@ -22,7 +22,7 @@ var checkEnemyCollision = function(player, block) {
   var odx = player.origin.x - block.position.x
   var ody = player.origin.y - block.position.y
   if (block.type == Block.BlockType.Block) {
-    return (Math.abs(dx) <= (player.width + block.width) / 2 && Math.abs(dy) < (player.height + block.height) / 2) && (Math.abs(ody) < (player.height + block.height) / 2 && Math.abs(odx) >= (player.width + block.width) / 2)
+    return (Math.abs(dx) < (player.width + block.width) / 2 && Math.abs(dy) < (player.height + block.height) / 2) && Math.abs(ody) < Math.abs(odx) && odx < 0
   } else {
     return (Math.abs(dx) < (player.width + block.width) / 2 && Math.abs(dy) < (player.height + block.height) / 2)
   }
