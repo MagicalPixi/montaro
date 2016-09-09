@@ -11,7 +11,7 @@ var sprite = dogFn({
   x: 320,
   y: 0,
 })
-
+sprite.alive = true
 
 /**
  *  --> physics
@@ -27,9 +27,22 @@ world.world.addPlayer(player)
 /**
  *  --> public method
  **/
+var flyoutSpeed = {x: 2, y: 8}
+var position = {x: 0, y: 0}
+var g = 0.1 
+ 
 sprite.render = function() {
-  sprite.x = player.position.x;
-  sprite.y = world.getY(player.position.y)
+  if (sprite.alive) {
+    sprite.x = player.position.x;
+    sprite.y = world.getY(player.position.y)
+  } else {
+    sprite.rotation += 0.2
+    position.x += flyoutSpeed.x
+    position.y += flyoutSpeed.y
+    flyoutSpeed.y -= g
+    sprite.x = position.x
+    sprite.y = world.getY(position.y)
+  }
 }
 sprite.play();
 
@@ -47,6 +60,14 @@ container.jump = function () {
     player.v.y = 1500
   }
 };
+
+container.end = function() {
+  if (sprite.alive) {
+    sprite.alive = false
+    sprite.stop()
+    position = player.position
+  }
+}
 
 container.up = function () {
   if(this.y > upY){

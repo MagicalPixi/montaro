@@ -106,6 +106,7 @@ var render = function (renderer) {
       });
 
       world.on('enemyCollision', function (event) {
+        dog.end()
         console.log({event: event, message: 'game over'})
       })
       stage.render = function () {

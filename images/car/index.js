@@ -25,9 +25,10 @@ module.exports = function (arg) {
     position:{
       x:x,
       y:y
-    }
+    },
+    type: Block.BlockType.Enemy
   })
-
+  
   world.world.addBlock(myBlock);
 
   sp.render = function () {
