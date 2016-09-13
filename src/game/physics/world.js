@@ -95,7 +95,9 @@ World.prototype.step = function(dt) {
     player.v.y = player.v.y + (player.a.y + this.gravity) * dt
     var result = checkEnemyCollision(this, this.blocks, player)
     if (result.enemy) {
-      this.sendEvent(enemyCollisionEvent(player, result.enemy))
+      if (result.enemy.type == Block.BlockType.Enemy) {
+        this.sendEvent(enemyCollisionEvent(player, result.enemy))
+      }
     } else {
       if (result.topBlock && result.bottomBlock){
         if (collision.checkBottomCollision(player, result.topBlock)) {
@@ -117,13 +119,14 @@ var checkEnemyCollision = function(world, blocks, player) {
   var bottomBlock = null
   for (var i in blocks) {
     var current = blocks[i]
-    if (current.position.x < player.position.x + player.width && current.position.x >= player.position.x - current.width) {
+    if (current.type == Block.BlockType.Block && current.position.x < player.position.x + player.width && current.position.x >= player.position.x - current.width) {
       if (!topBlock || current.position.y >= topBlock.position.y) topBlock = current
       if (!bottomBlock || current.position.y <= bottomBlock.position.y) bottomBlock = current
     }
     if (current.type == Block.BlockType.Reward) {
       if (collision.checkEnemyCollision(player, current)) {
         world.sendEvent(rewardCollisionEvent(player, current))
+        if (!enemy) enemy = current
       }
     } else {
       if (collision.checkEnemyCollision(player, current)) {

@@ -4,7 +4,8 @@ var jsonResource = [
     'car',
     'cat'
   ],
-  pngResource = [
+pngResource = [
+    'star',
     'bg',
     'bg2',
     'block',
@@ -43,6 +44,7 @@ var render = function (renderer) {
 
       var directionButtonFn = require('../../images/directionButton');
       var upButton = directionButtonFn()
+      var score = 0
       upButton.x = 10;
       upButton.y = 640 - 220;
 
@@ -53,6 +55,7 @@ var render = function (renderer) {
       var goldFn = require('../../images/gold');
 
       var blockFactory = require('./block');
+      var starFactory = require('../../images/star')
       // var backgroundFn = require('./background')
 
       /**
@@ -60,16 +63,19 @@ var render = function (renderer) {
        **/
       function addBlock(count) {
         var block = blockFactory();
-        // var building = backgroundFn();
-
         if (block) {
           stage.addChildAt(block,3)
         }
-        // if(building){
-        //   stage.addChild(building)
-        // }
       }
 
+      function addStar() { 
+        var randomy = Math.random() * 200 + 300
+        var star = starFactory({position: {x: 1004, y: randomy}})
+        if (star) {
+          stage.addChild(star)
+        }
+      }
+      
       var road = require('./road');
       stage.addChild(road);
 
@@ -102,19 +108,26 @@ var render = function (renderer) {
       // });
       document.body.addEventListener('touchstart',function () {
         dog.jump()
-        console.log('jump')
       });
 
       world.on('enemyCollision', function (event) {
         dog.end()
-        console.log({event: event, message: 'game over'})
       })
+
+      world.on('rewardCollision', function(event) {
+          event.reward.sprite.dismiss()
+          score ++    
+      })
+      
       stage.render = function () {
         counter++
         world.step(1 / 60)
         if (counter % 60 === 0) {
           var i = counter / 25
           addBlock(counter)
+        }
+        if (counter % 30 === 0) {
+          addStar(counter)
         }
         stage.children.forEach(function (child) {
           if (child.render) {

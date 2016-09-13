@@ -31,18 +31,21 @@ var starFactory = function(arg) {
       y: y
     }
   });
-
   world.world.addBlock(block);
-
+  block.sprite = sprite
   sprite.render = function() {
     block.position.x -= world.speed
     sprite.x = block.position.x
     sprite.y = world.getY(block.position.y);
-
     if (sprite.x < 0) {
       sprite.parent.removeChild(sprite)
       block.world.removeBlock(block)
     }
+  }
+  sprite.dismiss = function() {
+    sprite.parent.removeChild(sprite)
+    block.sprite = null
+    block.world.removeBlock(block)
   }
   return sprite
 }
