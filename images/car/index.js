@@ -1,8 +1,8 @@
 var mySpriteFn = require('./sprite.js');
 var pixiLib = require('pixi-lib')
 
-var world = require('../../javascripts/game/world')
-var Block = require('../../javascripts/game/physics/index').Block
+var world = require('../../src/game/world')
+var Block = require('../../src/game/physics/index').Block
 
 var roadFn = require('../road');
 
