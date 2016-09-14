@@ -18,7 +18,19 @@ pngResource = [
     'tree',
     'cloud',
     'cloudSun',
-    'game_background'
+    'game_background',
+    "greenHill",
+"greenMountains",
+"westLakeLantern",
+"westLakeHydrant",
+"groupBuildings",
+"smokeShop",
+"platformChair",
+"westLakeBridgeWave",
+"westLakeBridgeApproache",
+"westLakeBridge",
+"westLakeMansion",
+"building5",
   ]
 var stage = new PIXI.Container()
 stage.pivot = new PIXI.Point(502, 320)
@@ -47,23 +59,23 @@ var render = function (renderer) {
        * direction button
        */
       var directionButtonFn = require('../../images/directionButton');
-      var upButton = directionButtonFn()
-      upButton.x = 10;
-      upButton.y = 640 - 220;
-
-      var downButton = directionButtonFn();
-      downButton.x = 10;
-      downButton.y = 640 - 110;
-      
-      upButton.on('touchstart',function (e) {
-        dog.up();
-        e.data.originalEvent.stopPropagation()
-      });
-
-      downButton.on('touchstart',function (e) {
-        dog.down()
-        e.data.originalEvent.stopPropagation()
-      })
+      // var upButton = directionButtonFn()
+      // upButton.x = 10;
+      // upButton.y = 640 - 220;
+      //
+      // var downButton = directionButtonFn();
+      // downButton.x = 10;
+      // downButton.y = 640 - 110;
+      //
+      // upButton.on('touchstart',function (e) {
+      //   dog.up();
+      //   e.data.originalEvent.stopPropagation()
+      // });
+      //
+      // downButton.on('touchstart',function (e) {
+      //   dog.down()
+      //   e.data.originalEvent.stopPropagation()
+      // })
 
       var blockFactory = require('./block');
       var starFactory = require('../../images/star')
@@ -73,19 +85,19 @@ var render = function (renderer) {
        **/
       function addBlock(count) {
         var block = blockFactory();
-        if (block) {
+        if (block && 0) {
           stage.addChildAt(block,3)
         }
       }
 
-      function addStar() { 
+      function addStar() {
         var randomy = Math.random() * 200 + 300
         var star = starFactory({position: {x: 1004, y: randomy}})
         if (star) {
           stage.addChild(star)
         }
       }
-      
+
       var road = require('./road');
       var gameBackground = require('../../images/game_background')()
       stage.addChild(gameBackground)
@@ -99,18 +111,16 @@ var render = function (renderer) {
       dog.reset()
       stage.addChild(dog)
       stage.interactive = true;
-      stage.addChild(upButton)
-      stage.addChild(downButton)
       stage.on('touchstart', function() {
         dog.jump()
       })
-      
+
       world.on('enemyCollision', function (event) {
         dog.end()
       })
       world.on('rewardCollision', function(event) {
           event.reward.sprite.dismiss()
-          score ++    
+          score ++
       })
       stage.render = function () {
         counter++

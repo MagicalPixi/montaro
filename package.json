@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "axios": "^0.14.0",
     "gulp": "^3.9.1",
     "gulp-download": "0.0.1",
     "gulp-qiniu": "^0.2.3",
@@ -20,17 +21,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "resources": [
-    "greenHill",
-    "greenMountains",
-    "westLakeLantern",
-    "westLakeHydrant",
-    "groupBuildings",
-    "smokeShop",
-    "platformChair",
-    "westLakeBridgeWave",
-    "westLakeBridgeApproache",
-    "westLakeBridge",
-    "westLakeMansion"
+    "building5"
   ],
   "scenes": {},
   "scenesEdit": [],

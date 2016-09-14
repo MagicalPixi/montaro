@@ -4,13 +4,16 @@ var bgFn2 = require('../../../images/bg2');
 var roadFn = require('../../../images/road')
 
 var groupFn = require('../background/group')
+var groupFn2 = require('../background/group2')
 
 //生成背景
 function repeatBackground(spriteFn) {
-  var num = 1;
   var arr = [];
 
-  var fns = [spriteFn];
+
+  var fns = [].slice.call(arguments,0,arguments.length);
+
+  var num = fns.length;
 
   function build(fn, i) {
 
@@ -25,7 +28,7 @@ function repeatBackground(spriteFn) {
 
   for(var i=0;i<num;i++){
 
-    var fn = fns[i%fns.length];
+    var fn = fns[i];
 
     var bg = build(fn,i);
 
@@ -49,7 +52,7 @@ bgs.map(function (bg) {
 });
 
 
-var buildings = repeatBackground(groupFn);
+var buildings = repeatBackground(groupFn,groupFn2);
 
 buildings.map(function (b) {
   b.y = 0;
