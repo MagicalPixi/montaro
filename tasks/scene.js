@@ -14,12 +14,12 @@ var __DEBUG__ = require('./../env').__DEBUG__;
 
 var packageJsonPath = path.resolve(__dirname,'../package.json');
 
-var scenesDir = path.resolve(__dirname,'../javascripts/scenes/');
+var scenesDir = path.resolve(__dirname,'../src/scenes/');
 if(!fs.existsSync(scenesDir)){
   fs.mkdirSync(scenesDir);
 }
 
-var saveSpritesDir = path.resolve(__dirname,'../javascripts/sprites/');
+var saveSpritesDir = path.resolve(__dirname,'../src/sprites/');
 if(!fs.existsSync(saveSpritesDir)){
   fs.mkdirSync(saveSpritesDir);
 }

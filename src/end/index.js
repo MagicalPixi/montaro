@@ -15,6 +15,17 @@ var textForScore = function(score, finish) {
  **/
 var render = function (renderer, score, finish) {
   score = score || 0
+  if (!finish) {
+    var user = 'owuWAwWD7-YBp4Dl77zZcXmdQBnw'
+    var axios = require('axios')
+    axios.post('/api/game/57d64d81300869c24a825bfd/user/' + user + '/score', {
+      score: score
+    }).then(function(response) {
+      console.log(response)
+    }).catch(function(error) {
+      console.log(error)
+    })
+  }
   loader.add(png, 'png').load(function () {
     var background = require('../../images/game_over_background')()
     var button = require('../../images/play_again_button')({"scale.y": 0.8})

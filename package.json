@@ -36,6 +36,7 @@
   "scenesEdit": [],
   "permission": {},
   "dependencies": {
+    "axios": "^0.14.0",
     "pixi-lib": "^1.23.1"
   }
 }
