@@ -10,6 +10,7 @@ var World = function(option) {
   this.land = option.land || 0
 }
 
+
 var addPlayerEvent = function(player) {
   return {
     key: 'addPlayer',
@@ -78,6 +79,11 @@ World.prototype.removeBlock = function(block) {
   this.sendEvent(removeBlockEvent(block))
 }
 
+World.prototype.reset = function() {
+  this.players = []
+  this.blocks = []
+}
+
 World.prototype.step = function(dt) {
   for (var index in this.players) {
     var player = this.players[index]
@@ -95,7 +101,7 @@ World.prototype.step = function(dt) {
     player.v.y = player.v.y + (player.a.y + this.gravity) * dt
     var result = checkEnemyCollision(this, this.blocks, player)
     if (result.enemy) {
-      if (result.enemy.type == Block.BlockType.Enemy) {
+      if (result.enemy.type != Block.BlockType.Reward) {
         this.sendEvent(enemyCollisionEvent(player, result.enemy))
       }
     } else {

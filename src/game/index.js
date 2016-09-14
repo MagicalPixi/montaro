@@ -17,16 +17,14 @@ pngResource = [
     'bush',
     'tree',
     'cloud',
-    'cloudSun'
-  ],
-  counter = 0;
-
+    'cloudSun',
+    'game_background'
+  ]
 var stage = new PIXI.Container()
 stage.pivot = new PIXI.Point(502, 320)
 stage.x = 320
 stage.y = 502
 stage.rotation = Math.PI / 2
-
 
 window.W = 1004;
 window.H = 640;
@@ -41,22 +39,34 @@ var render = function (renderer) {
   loader.add(jsonResource, 'json')
     .add(pngResource, 'png')
     .load(function () {
-
+      var counter = 0
+      world.reset()
+      var score = 0
+      stage.removeChildren();
+      /**
+       * direction button
+       */
       var directionButtonFn = require('../../images/directionButton');
       var upButton = directionButtonFn()
-      var score = 0
       upButton.x = 10;
       upButton.y = 640 - 220;
 
       var downButton = directionButtonFn();
       downButton.x = 10;
       downButton.y = 640 - 110;
+      
+      upButton.on('touchstart',function (e) {
+        dog.up();
+        e.data.originalEvent.stopPropagation()
+      });
 
-      var goldFn = require('../../images/gold');
+      downButton.on('touchstart',function (e) {
+        dog.down()
+        e.data.originalEvent.stopPropagation()
+      })
 
       var blockFactory = require('./block');
       var starFactory = require('../../images/star')
-      // var backgroundFn = require('./background')
 
       /**
        * --> Private Method
@@ -77,48 +87,31 @@ var render = function (renderer) {
       }
       
       var road = require('./road');
+      var gameBackground = require('../../images/game_background')()
+      stage.addChild(gameBackground)
       stage.addChild(road);
 
       var dog = require('./dog')
-
-      window.dog = dog;
-
+      dog.finishCb = function() {
+        var end = require('../end')
+        end(renderer, score, false)
+      }
+      dog.reset()
       stage.addChild(dog)
-
-      stage.addChild(goldFn())
-
       stage.interactive = true;
-
       stage.addChild(upButton)
       stage.addChild(downButton)
-
-      upButton.on('touchstart',function (e) {
-        dog.up();
-
-        e.data.originalEvent.stopPropagation()
-      });
-
-      downButton.on('touchstart',function (e) {
-        dog.down()
-
-        e.data.originalEvent.stopPropagation()
-      })
-
-      // stage.on('touchstart', function () {
-      // });
-      document.body.addEventListener('touchstart',function () {
+      stage.on('touchstart', function() {
         dog.jump()
-      });
-
+      })
+      
       world.on('enemyCollision', function (event) {
         dog.end()
       })
-
       world.on('rewardCollision', function(event) {
           event.reward.sprite.dismiss()
           score ++    
       })
-      
       stage.render = function () {
         counter++
         world.step(1 / 60)
@@ -135,8 +128,6 @@ var render = function (renderer) {
           }
         })
       }
-
-
       renderer(stage)
     })
 }
