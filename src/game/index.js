@@ -31,6 +31,7 @@ pngResource = [
 "westLakeBridge",
 "westLakeMansion",
 "building5",
+"building6",
   ]
 var stage = new PIXI.Container()
 stage.pivot = new PIXI.Point(502, 320)

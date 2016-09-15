@@ -27,7 +27,6 @@ var tree = require('../../../images/tree');
 
 var bush = require('../../../images/bush');
 var building5 = require('../../../images/building5');
-var building6 = require('../../../images/building6');
 
 var maxY = 640 - roadFn.roadHeight;
 
@@ -37,18 +36,13 @@ function treesFn() {
     {
       'scale.x':0.2,
       'scale.y':0.2,
-      x:120,
+      x:170,
     },
     {
-      'scale.x':0.2,
-      'scale.y':0.2,
-      x:600,
+      'scale.x':0.15,
+      'scale.y':0.15,
+      x:750,
     },
-    {
-      'scale.x':0.14,
-      'scale.y':0.14,
-      x:680
-    }
   ];
 
   return [argArr,tree];
@@ -60,22 +54,7 @@ function bushesFn() {
     {
       "scale.x": 0.08,
       "scale.y": 0.08,
-      x: 170,
-    },
-    {
-      "scale.x": 0.08,
-      "scale.y": 0.08,
-      x: 420,
-    },
-    {
-      "scale.x": 0.08,
-      "scale.y": 0.08,
-      x: 750,
-    },
-    {
-      "scale.x": 0.10,
-      "scale.y": 0.10,
-      x: 925,
+      x: 150,
     },
   ]
 
@@ -88,75 +67,51 @@ function platformChairFn() {
     {
       'scale.x':0.07,
       'scale.y':0.07,
-      x:250
+      x:00
     },
-    // {
-    //   'scale.x':0.07,
-    //   'scale.y':0.07,
-    //   x:800
-    // }
   ]
 
   return [argArr,platformChair];
 }
 
-function westLakeHydrantFn() {
-  var arg = [
-    {
-      'scale.x':0.5,
-      'scale.y':0.5,
-      x:400
-    },
-    {
-      'scale.x':0.5,
-      'scale.y':0.5,
-      x:700
-    }
-  ]
-
-  return [arg,westLakeHydrant]
-}
-
-function building6Fn() {
-  var arg = [
-    {
-      'scale.x':0.3,
-      'scale.y':0.3,
-      x:830
-    }
-  ]
-  return [arg,building6];
-}
-
 function greenHillFn() {
   var args = [
     {
+      'scale.x':0.25,
+      'scale.y':0.25,
+      x:50
+    },
+    {
       'scale.x':0.35,
       'scale.y':0.35,
-      x:350
+      x:500
     }
   ]
 
   return [args,greenHill]
 }
 
-function descrorateFn() {
-  var arg = [
+function westLakeMansionFn() {
+  var argArr = [
     {
-      'scale.x':0.10,
-      'scale.y':0.1,
-      x:500
+      'scale.x':0.5,
+      'scale.y':0.5,
+      'x':260,
     },
+  ]
+
+  return [argArr,westLakeMansion]
+}
+
+function smokeShopFn() {
+  var arg=[
     {
-      'scale.x':0.08,
-      'scale.y':0.08,
-      x:555
+      'scale.x':0.3,
+      'scale.y':0.3,
+      x:810,
     }
   ]
-  return [arg,[
-    building5,
-    westLakeHydrant,
-  ]]
+  return [arg,smokeShop]
 }
 
 function maxYAddChildren(stage,arrFnWrapper) {
@@ -167,11 +122,14 @@ module.exports = function () {
   var stage = new PIXI.Container();
 
   maxYAddChildren(stage,greenHillFn)
-  maxYAddChildren(stage,building6Fn)
+
   maxYAddChildren(stage,platformChairFn)
+  maxYAddChildren(stage,westLakeMansionFn)
+  maxYAddChildren(stage,smokeShopFn)
+
   maxYAddChildren(stage,bushesFn)
-  maxYAddChildren(stage,descrorateFn)
   maxYAddChildren(stage,treesFn)
+
 
   console.log('!!!')
 

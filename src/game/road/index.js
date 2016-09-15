@@ -5,6 +5,7 @@ var roadFn = require('../../../images/road')
 
 var groupFn = require('../background/group')
 var groupFn2 = require('../background/group2')
+var groupFn3 = require('../background/group3')
 
 //生成背景
 function repeatBackground(spriteFn) {
@@ -52,7 +53,7 @@ bgs.map(function (bg) {
 });
 
 
-var buildings = repeatBackground(groupFn,groupFn2);
+var buildings = repeatBackground(groupFn,groupFn2,groupFn3);
 
 buildings.map(function (b) {
   b.y = 0;
