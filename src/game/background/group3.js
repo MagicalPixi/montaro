@@ -16,9 +16,6 @@ var westLakeHydrant = require('../../../images/westLakeHydrant');
 var groupBuildings = require('../../../images/groupBuildings');
 var smokeShop = require('../../../images/smokeShop');
 var platformChair = require('../../../images/platformChair');
-var westLakeBridgeWave = require('../../../images/westLakeBridgeWave');
-var westLakeBridgeApproache = require('../../../images/westLakeBridgeApproache');
-var westLakeBridge = require('../../../images/westLakeBridge');
 var westLakeMansion = require('../../../images/westLakeMansion');
 
 var roadFn = require('../../../images/road');

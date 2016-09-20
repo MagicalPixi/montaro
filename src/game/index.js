@@ -4,7 +4,7 @@ var jsonResource = [
     'car',
     'cat'
   ],
-pngResource = [
+  pngResource = [
     'star',
     'bg',
     'bg2',
@@ -20,18 +20,18 @@ pngResource = [
     'cloudSun',
     'game_background',
     "greenHill",
-"greenMountains",
-"westLakeLantern",
-"westLakeHydrant",
-"groupBuildings",
-"smokeShop",
-"platformChair",
-"westLakeBridgeWave",
-"westLakeBridgeApproache",
-"westLakeBridge",
-"westLakeMansion",
-"building5",
-"building6",
+    "greenMountains",
+    "westLakeLantern",
+    "westLakeHydrant",
+    "groupBuildings",
+    "smokeShop",
+    "platformChair",
+    "westLakeBridgeWave",
+    "westLakeBridgeApproache",
+    "westLakeBridge",
+    "westLakeMansion",
+    "building5",
+    "building6",
   ]
 var stage = new PIXI.Container()
 stage.pivot = new PIXI.Point(502, 320)
@@ -87,7 +87,7 @@ var render = function (renderer) {
       function addBlock(count) {
         var block = blockFactory();
         if (block && 0) {
-          stage.addChildAt(block,3)
+          stage.addChildAt(block, 3)
         }
       }
 
@@ -105,23 +105,23 @@ var render = function (renderer) {
       stage.addChild(road);
 
       var dog = require('./dog')
-      dog.finishCb = function() {
+      dog.finishCb = function () {
         var end = require('../end')
         end(renderer, score, false)
       }
       dog.reset()
       stage.addChild(dog)
       stage.interactive = true;
-      stage.on('touchstart', function() {
+      stage.on('touchstart', function () {
         dog.jump()
       })
 
       world.on('enemyCollision', function (event) {
         dog.end()
       })
-      world.on('rewardCollision', function(event) {
-          event.reward.sprite.dismiss()
-          score ++
+      world.on('rewardCollision', function (event) {
+        event.reward.sprite.dismiss()
+        score++
       })
       stage.render = function () {
         counter++
