@@ -1,30 +1,29 @@
 var pixiLib = require('pixi-lib');
 
-var args = [{
 
-  textures:pixiLib.getTextures('westLakeBridgeWave'),
+module.exports = function spriteFn(arg){
 
-  
+  var args = [{
 
-    
+    textures:pixiLib.getTextures('westLakeBridgeWave'),
+
+
+
+
 
     "spriteName" :  "westLakeBridgeWave" ,
 
-    
 
-  
-}]
+
+
+  }]
 
 
 
   args.push([
 
-    
+
   ]);
-
-
-
-module.exports = function spriteFn(arg){
 
   if(!arg){
      arg = {}
@@ -33,6 +32,8 @@ module.exports = function spriteFn(arg){
   for(var k in arg){
    args[0][k] = arg[k]
   }
+
+  console.log('yy:',args[0].y,arg.y)
 
   var mySprite = pixiLib.getIm.apply(pixiLib,args);
 

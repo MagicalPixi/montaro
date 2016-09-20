@@ -13,6 +13,7 @@ function arrFn(argsFn) {
 
     return arr.map(function (arg, i) {
 
+
       return fnArr[i % fnArr.length](arg);
     })
   }
@@ -21,10 +22,12 @@ function arrFn(argsFn) {
 function addChildren(stage, childrenFn,maxY) {
   childrenFn().map(function (c) {
 
+    console.log(c.y,maxY);
+
     if (!c.y) {
       c.y = maxY;
-      c.anchor.y = 1;
     }
+    c.anchor.y = 1;
 
     stage.addChild(c);
   })
