@@ -173,7 +173,5 @@ module.exports = function () {
   maxYAddChildren(stage,descrorateFn)
   maxYAddChildren(stage,treesFn)
 
-  console.log('!!!')
-
   return stage;
 };

@@ -37,7 +37,7 @@ function repeatBackground(spriteFn) {
     arr.push(bg);
   }
   //补尾部
-  arr.push(build(fns[0],num));
+  // arr.push(build(fns[0],num));
 
 
   return arr;
@@ -54,8 +54,17 @@ bgs.map(function (bg) {
 });
 
 
-//var buildings = repeatBackground(groupFn,groupFn2,groupFn3);
-var buildings = repeatBackground(groupFn4);
+var buildings = repeatBackground(
+  groupFn,
+  groupFn2,
+  groupFn,
+  groupFn2,
+  groupFn4,
+  groupFn,
+  groupFn2,
+  groupFn3,
+  groupFn,
+  groupFn2);
 
 buildings.map(function (b) {
   b.y = 0;
@@ -67,13 +76,13 @@ stage.setSpeed = function (s) {
   stage.speed = s;
 }
 
-// stage.render = function () {
-//   [].concat(bgs).concat(buildings).map(function (bg) {
-//     bg.x -= stage.speed;
-//     if(bg.x <= bg.sideX){
-//       bg.x = bg.initX;
-//     }
-//   });
-// }
+stage.render = function () {
+  [].concat(bgs).concat(buildings).map(function (bg) {
+    bg.x -= stage.speed;
+    if(bg.x <= bg.sideX){
+      bg.x = bg.initX;
+    }
+  });
+}
 
 module.exports = stage;
