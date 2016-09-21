@@ -42,10 +42,19 @@ var starFactory = function(arg) {
       block.world.removeBlock(block)
     }
   }
+
+  var audioPlayObj = pixiLib.audio.loadAudio({
+    hit:'/audio/ding.mp3'
+  });
+
+
   sprite.dismiss = function() {
     sprite.parent.removeChild(sprite)
     block.sprite = null
     block.world.removeBlock(block)
+
+    audioPlayObj.hit();
+
   }
   return sprite
 }

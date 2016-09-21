@@ -21,7 +21,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "resources": [
-    "building6"
+    "goldCoin"
   ],
   "scenes": {},
   "scenesEdit": [],
