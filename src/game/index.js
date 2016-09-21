@@ -32,6 +32,7 @@ var jsonResource = [
     "westLakeMansion",
     "building5",
     "building6",
+    "goldCoin",
   ]
 var stage = new PIXI.Container()
 stage.pivot = new PIXI.Point(502, 320)
@@ -54,7 +55,7 @@ var render = function (renderer) {
     .load(function () {
       var counter = 0
       world.reset()
-      var score = 0
+
       stage.removeChildren();
       /**
        * direction button
@@ -104,6 +105,13 @@ var render = function (renderer) {
       stage.addChild(gameBackground)
       stage.addChild(road);
 
+
+      var goldCoinFn = require('../../images/goldCoin')
+      var goldCoin = goldCoinFn();
+
+      stage.addChild(goldCoin)
+
+
       var dog = require('./dog')
       dog.finishCb = function () {
         var end = require('../end')
@@ -121,7 +129,7 @@ var render = function (renderer) {
       })
       world.on('rewardCollision', function (event) {
         event.reward.sprite.dismiss()
-        score++
+        goldCoin.upScore()
       })
       stage.render = function () {
         counter++
