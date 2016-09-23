@@ -49,5 +49,9 @@ module.exports = function (arg) {
     scoreObj.setText(++score)
   }
 
+  stage.getScore = function () {
+    return score;
+  }
+  
   return stage;
 };

@@ -60,24 +60,6 @@ var render = function (renderer) {
       /**
        * direction button
        */
-      var directionButtonFn = require('../../images/directionButton');
-      // var upButton = directionButtonFn()
-      // upButton.x = 10;
-      // upButton.y = 640 - 220;
-      //
-      // var downButton = directionButtonFn();
-      // downButton.x = 10;
-      // downButton.y = 640 - 110;
-      //
-      // upButton.on('touchstart',function (e) {
-      //   dog.up();
-      //   e.data.originalEvent.stopPropagation()
-      // });
-      //
-      // downButton.on('touchstart',function (e) {
-      //   dog.down()
-      //   e.data.originalEvent.stopPropagation()
-      // })
 
       var blockFactory = require('./block');
       var starFactory = require('../../images/star')
@@ -87,7 +69,7 @@ var render = function (renderer) {
        **/
       function addBlock(count) {
         var block = blockFactory();
-        if (block && 0) {
+        if (block ) {
           stage.addChildAt(block, 3)
         }
       }
@@ -115,7 +97,7 @@ var render = function (renderer) {
       var dog = require('./dog')
       dog.finishCb = function () {
         var end = require('../end')
-        end(renderer, score, false)
+        end(renderer, goldCoin.getScore(), false)
       }
       dog.reset()
       stage.addChild(dog)
