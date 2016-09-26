@@ -50,11 +50,12 @@ var world = require('./world').world
  *  --> Public Method
  **/
 var render = function (renderer) {
+  
   loader.add(jsonResource, 'json')
     .add(pngResource, 'png')
     .load(function () {
-      var counter = 0
-      world.reset()
+      var counter = 0;
+      world.reset();
 
       stage.removeChildren();
       /**
@@ -63,6 +64,9 @@ var render = function (renderer) {
 
       var blockFactory = require('./block');
       var starFactory = require('../../images/star')
+      var road = require('./road');
+      var gameBackground = require('../../images/game_background')();
+      var goldCoinFn = require('../../images/goldCoin')
 
       /**
        * --> Private Method
@@ -70,8 +74,11 @@ var render = function (renderer) {
       function addBlock(count) {
         var block = blockFactory();
         if (block ) {
-          stage.addChildAt(block, 3)
+          stage.addChildAt(block, 3);
+        }else{
         }
+
+        return !!block;
       }
 
       function addStar() {
@@ -82,13 +89,10 @@ var render = function (renderer) {
         }
       }
 
-      var road = require('./road');
-      var gameBackground = require('../../images/game_background')()
-      stage.addChild(gameBackground)
+      stage.addChild(gameBackground);
       stage.addChild(road);
 
 
-      var goldCoinFn = require('../../images/goldCoin')
       var goldCoin = goldCoinFn();
 
       stage.addChild(goldCoin)
@@ -96,8 +100,10 @@ var render = function (renderer) {
 
       var dog = require('./dog')
       dog.finishCb = function () {
-        var end = require('../end')
-        end(renderer, goldCoin.getScore(), false)
+        var end = require('../end');
+        console.log('结束');
+        
+        //end(renderer, goldCoin.getScore(), false)
       }
       dog.reset()
       stage.addChild(dog)
@@ -107,18 +113,32 @@ var render = function (renderer) {
       })
 
       world.on('enemyCollision', function (event) {
+
+        gameFail = true;
+
         dog.end()
       })
       world.on('rewardCollision', function (event) {
         event.reward.sprite.dismiss()
         goldCoin.upScore()
       })
+
+      //游戏失败,游戏结束
+      var gameFail = false,
+        gameOver = false;
+      
       stage.render = function () {
-        counter++
+        counter++;
         world.step(1 / 60)
-        if (counter % 60 === 0) {
-          var i = counter / 25
-          addBlock(counter)
+        
+        gameOver = road.isGameEnd();
+        if(gameOver){
+          dog.gogogo();
+        }
+        
+        if (counter % 60 === 0 && !(gameOver && gameFail)) {
+          var i = counter / 25;
+          //addBlock(counter);
         }
         if (counter % 30 === 0) {
           addStar(counter)
@@ -128,7 +148,7 @@ var render = function (renderer) {
             child.render()
           }
         })
-      }
+      };
       renderer(stage)
     })
 }
