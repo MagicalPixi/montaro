@@ -71,16 +71,14 @@ bgs.map(function (bg) {
 });
 
 var buildingsArr = [
-  // groupFn,
-  // groupFn2,
   groupFn,
   groupFn2,
   groupFn4,
-  // groupFn,
-  // groupFn2,
-  // groupFn,
-  // groupFn2,
+  groupFn,
+  groupFn2,
   groupFn3,
+  groupFn,
+  groupFn2,
   groupFn5
 ];
 

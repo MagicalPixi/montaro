@@ -138,7 +138,7 @@ var render = function (renderer) {
         
         if (counter % 60 === 0 && !(gameOver && gameFail)) {
           var i = counter / 25;
-          //addBlock(counter);
+          addBlock(counter);
         }
         if (counter % 30 === 0) {
           addStar(counter)
