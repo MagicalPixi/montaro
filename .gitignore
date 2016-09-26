@@ -4,6 +4,8 @@ logs
 *.log
 npm-debug.log*
 *.swp
+.gulp/tinypng
+compress/*
 # Runtime data
 pids
 *.pid
