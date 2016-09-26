@@ -103,7 +103,7 @@ var render = function (renderer) {
         var end = require('../end');
         console.log('结束');
         
-        //end(renderer, goldCoin.getScore(), false)
+        end(renderer, goldCoin.getScore(), false)
       }
       dog.reset()
       stage.addChild(dog)
