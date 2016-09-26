@@ -44,7 +44,7 @@ var starFactory = function(arg) {
   }
 
   var audioPlayObj = pixiLib.audio.loadAudio({
-    hit:'/audio/ding.mp3'
+    hit:'http://o8c60jr2y.bkt.clouddn.com/ding.mp3'
   });
 
 
