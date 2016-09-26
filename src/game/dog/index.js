@@ -29,12 +29,28 @@ var player = new Player({
 var flyoutSpeed = {x: 2, y: 8}
 var position = {x: 0, y: 0}
 var g = 0.1 
- 
+
+//水平移动数值
+sprite.moveSpeed = 0;
+sprite.moveX = 0;
+
+//狗到达终点的x值.
+var endX = 650;
+
 sprite.render = function() {
   if (!sprite.finish) {
+
     if (sprite.alive) {
-      sprite.x = player.position.x;
-      sprite.y = world.getY(player.position.y)
+      sprite.moveX += sprite.moveSpeed;
+
+      sprite.x = player.position.x + sprite.moveX;
+      sprite.y = world.getY(player.position.y);
+
+      if(sprite.x > endX + 250){
+        sprite.finish = true
+        container.finishCb();
+      }
+
     } else {
       sprite.rotation += 0.2
       position.x += flyoutSpeed.x
@@ -51,9 +67,12 @@ sprite.render = function() {
     }
   }
 }
+
+sprite.gogogo = function(){
+  sprite.moveSpeed = 1;
+}
+
 sprite.play();
-
-
 
 var upY = -55;
 var downY = 55;
@@ -61,6 +80,14 @@ var distance = 55;
 
 var container = new PIXI.Container();
 container.y = 0;
+
+var g = new PIXI.Graphics();
+
+g.beginFill(0x000000);
+g.drawRect(0,0,640,700);
+g.endFill();
+
+container.mask = g;
 
 container.jump = function () {
   if (player.inland){
@@ -105,6 +132,10 @@ container.reset = function() {
   g = 0.1 
 }
 
-container.render = sprite.render.bind(sprite)
+container.render = sprite.render.bind(sprite);
+container.gogogo = sprite.gogogo;
+
+
+
 
 module.exports = container
