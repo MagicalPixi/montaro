@@ -8,6 +8,11 @@ module.exports = {
     new webpack.DefinePlugin({
       __DEBUG__:true
     }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
   ],
   externals:{
     'pixi':'PIXI',
