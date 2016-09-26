@@ -7,6 +7,7 @@ var groupFn = require('../background/group')
 var groupFn2 = require('../background/group2')
 var groupFn3 = require('../background/group3')
 var groupFn4 = require('../background/group4')
+var groupFn5 = require('../background/group5')
 
 //生成背景
 function repeatBackground(spriteFn) {
@@ -61,6 +62,7 @@ function getBg(bgFn, i) {
 
 var stage = new PIXI.Container();
 stage.speed = 2;
+stage.gameEnd = false;
 
 var bgs = repeatBackground(roadFn)
 
@@ -68,35 +70,19 @@ bgs.map(function (bg) {
   stage.addChild(bg);
 });
 
-
-// var buildings = repeatBackground(
-//   groupFn,
-//   groupFn2,
-//   groupFn,
-//   groupFn2,
-//   groupFn4,
-//   groupFn,
-//   groupFn2,
-//   groupFn3,
-//   groupFn,
-//   groupFn2);
 var buildingsArr = [
-  groupFn,
-  groupFn2,
+  // groupFn,
+  // groupFn2,
   groupFn,
   groupFn2,
   groupFn4,
-  groupFn,
-  groupFn2,
+  // groupFn,
+  // groupFn2,
+  // groupFn,
+  // groupFn2,
   groupFn3,
-  groupFn,
-  groupFn2
+  groupFn5
 ];
-//
-// buildings.map(function (b) {
-//   b.y = 0;
-//   stage.addChild(b);
-// })
 
 
 stage.buildings = [
@@ -113,7 +99,19 @@ stage.setSpeed = function (s) {
   stage.speed = s;
 }
 
+stage.setGameEnd = function () {
+  stage.gameEnd = true;
+}
+
+stage.isGameEnd = function () {
+  return stage.gameEnd;
+}
+
 stage.render = function () {
+
+  if(stage.gameEnd){
+    return true;
+  }
 
   var newBuildings = [];
 
@@ -129,6 +127,11 @@ stage.render = function () {
 
       bg.removed = true;
       stage.removeChild(bg);
+
+      //倒数第二个已经到达最边界,此时显示的是倒数最后一块。游戏结束
+      if(buildingsArr.length === 0){
+        stage.setGameEnd();
+      }
 
     } else {
       newBuildings.push(bg);
@@ -148,6 +151,8 @@ stage.render = function () {
     stage.buildings = newBuildings.slice();
   }
 
-}
+};
+
+
 
 module.exports = stage;
