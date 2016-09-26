@@ -14,7 +14,6 @@ var greenMountains = require('../../../images/greenMountains');
 var westLakeLantern = require('../../../images/westLakeLantern');
 var westLakeHydrant = require('../../../images/westLakeHydrant');
 var groupBuildings = require('../../../images/groupBuildings');
-var smokeShop = require('../../../images/smokeShop');
 var platformChair = require('../../../images/platformChair');
 var westLakeMansion = require('../../../images/westLakeMansion');
 
@@ -93,23 +92,13 @@ function westLakeMansionFn() {
     {
       'scale.x':0.5,
       'scale.y':0.5,
-      'x':260,
+      'x':350,
     },
   ]
 
   return [argArr,westLakeMansion]
 }
 
-function smokeShopFn() {
-  var arg=[
-    {
-      'scale.x':0.3,
-      'scale.y':0.3,
-      x:810,
-    }
-  ]
-  return [arg,smokeShop]
-}
 
 function maxYAddChildren(stage,arrFnWrapper) {
   return addChildren(stage,arrFn(arrFnWrapper),maxY);
@@ -122,7 +111,6 @@ module.exports = function () {
 
   maxYAddChildren(stage,platformChairFn)
   maxYAddChildren(stage,westLakeMansionFn)
-  maxYAddChildren(stage,smokeShopFn)
 
   maxYAddChildren(stage,bushesFn)
   maxYAddChildren(stage,treesFn)
