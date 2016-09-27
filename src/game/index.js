@@ -62,12 +62,15 @@ var render = function (renderer) {
        * direction button
        */
 
-      var blockFactory = require('./block');
+      var blockFactoryFn = require('./block');
       var starFactory = require('../../images/star')
-      var road = require('./road');
+      var roadFn = require('./road');
       var gameBackground = require('../../images/game_background')();
       var goldCoinFn = require('../../images/goldCoin')
 
+      var road = roadFn();
+
+      var blockFactory = blockFactoryFn()
       /**
        * --> Private Method
        **/
@@ -98,7 +101,8 @@ var render = function (renderer) {
       stage.addChild(goldCoin)
 
 
-      var dog = require('./dog')
+      var dogFn = require('./dog')
+      var dog = dogFn();
       dog.finishCb = function () {
         var end = require('../end');
         console.log('结束');
@@ -115,13 +119,12 @@ var render = function (renderer) {
       world.on('enemyCollision', function (event) {
 
         gameFail = true;
-
         dog.end()
       })
       world.on('rewardCollision', function (event) {
         event.reward.sprite.dismiss()
         goldCoin.upScore()
-      })
+      });
 
       //游戏失败,游戏结束
       var gameFail = false,

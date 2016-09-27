@@ -20,25 +20,34 @@ function empty() {
   return false;
 }
 
-var roadArr = repeat([
-  repeat(empty,2),
-  [
-    blockFnWrapper('l'),
-    blockFnWrapper('m'),
-    blockFnWrapper('h')
-  ].concat(repeat(empty,2)),
-  carFn,
-],10);
+
+module.exports = function () {
 
 
-var unzipRoadArr = unfoldArray(roadArr,[]);
-var index = 0;
+  var roadArr = repeat([
+    repeat(empty,2),
+    [
+      blockFnWrapper('l'),
+      blockFnWrapper('m'),
+      blockFnWrapper('h')
+    ].concat(repeat(empty,2)),
+    carFn,
+  ],4);
 
-function blockManager() {
 
-  var func = unzipRoadArr[index++];
+  var unzipRoadArr = unfoldArray(roadArr,[]);
+  var index = 0;
 
-  return  func ? func() : console.error('到终点了');
-}
 
-module.exports = blockManager;
+  function blockManager() {
+
+    var func = unzipRoadArr[index++];
+
+    console.log(unzipRoadArr.length,index)
+
+    return  func ? func() : console.info('没有障碍物');
+  }
+
+
+  return blockManager;
+};

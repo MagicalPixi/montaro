@@ -138,4 +138,12 @@ container.gogogo = sprite.gogogo;
 
 
 
-module.exports = container
+module.exports = function () {
+
+  sprite.moveX = 0;
+  sprite.moveSpeed = 0;
+
+  sprite.x = player.position.x;
+
+  return container;
+}
