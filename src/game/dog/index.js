@@ -48,7 +48,7 @@ sprite.render = function() {
 
       if(sprite.x > endX + 250){
         sprite.finish = true
-        container.finishCb();
+        container.finishCb(true);
       }
 
     } else {
@@ -61,7 +61,7 @@ sprite.render = function() {
       if (position.y < -150) {
         sprite.finish = true
         if (container.finishCb) {
-          container.finishCb()
+          container.finishCb(false)
         }
       }
     }

@@ -39,13 +39,17 @@ var render = function (renderer, score, finish) {
     text.x = 320
     text.y = 600
     stage.addChild(background)
+    
     stage.addChild(button)
     stage.addChild(text)
+    
     button.interactive = true
     button.on('touchstart', function() {
       var game = require('../game')
       game(renderer)
     })
+    
+    
     renderer(stage)
   })
 }

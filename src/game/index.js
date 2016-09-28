@@ -103,11 +103,13 @@ var render = function (renderer) {
 
       var dogFn = require('./dog')
       var dog = dogFn();
-      dog.finishCb = function () {
+
+      dog.finishCb = function (success) {
+        
         var end = require('../end');
         console.log('结束');
         
-        end(renderer, goldCoin.getScore(), false)
+        end(renderer, goldCoin.getScore(), success);
       }
       dog.reset()
       stage.addChild(dog)
@@ -132,7 +134,7 @@ var render = function (renderer) {
       
       stage.render = function () {
         counter++;
-        world.step(1 / 60)
+        world.step(1 / 60);
         
         gameOver = road.isGameEnd();
         if(gameOver){
