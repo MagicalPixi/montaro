@@ -12,6 +12,19 @@ var textForScore = function(score, finish) {
 
 var ajax = require('../lib/ajax');
 
+var loading = pixiLib.loading.mpLoading();
+var loadingEle = loading.el();
+
+document.body.appendChild(loadingEle);
+
+var si = setInterval(function () {
+
+  if(!loading.progress()){
+    clearInterval(si);
+  }
+
+},100);
+
 /**
  *  --> Public Method
  **/
@@ -26,15 +39,17 @@ var render = function (renderer, score, finish) {
     }).then(function(response) {
       console.log(response)
     });
-
   }
   loader.add(png, 'png').load(function () {
+
+    loadingEle.remove();
+
     var background = require('../../images/game_over_background')()
     var button = require('../../images/play_again_button')({"scale.y": 0.8})
     var text = new PIXI.Text(
       textForScore(score, finish),
       {font: '30px Helvetica-Light', 
-        fill: 'white'})
+        fill: 'white'});
     text.anchor.x = text.anchor.y = 0.5
     text.x = 320
     text.y = 600
@@ -47,8 +62,30 @@ var render = function (renderer, score, finish) {
     button.on('touchstart', function() {
       var game = require('../game')
       game(renderer)
-    })
-    
+    });
+
+    if(typeof wx !== 'undefined'){
+
+      var config = {
+        title:text,
+        desc:' ',
+        link:location.href,
+        imgUrl:'http://o8c60jr2y.bkt.clouddn.com/1/cat_share_icon.png',
+        type:'link',
+        success:function () {
+          alert('分享成功')
+        },
+        cancel:function () {
+          alert('分享成功')
+        }
+      }
+
+      wx.onMenuShareTimeline(config);
+      wx.onMenuShareAppMessage(config);
+    }
+
+
+
     
     renderer(stage)
   })

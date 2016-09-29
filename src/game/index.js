@@ -46,6 +46,23 @@ window.H = 640;
 var loader = require('../loader')
 var world = require('./world').world
 
+var loading = pixiLib.loading.mpLoading();
+
+var loadingEle = loading.el();
+loadingEle.style.transformOrigin = 'top'
+loadingEle.style.transform = 'rotate(90deg)';
+loadingEle.style.webkitTransformOrigin = 'top'
+loadingEle.style.webkitTransform = 'rotate(90deg)';
+document.body.appendChild(loadingEle)
+
+var si = setInterval(function () {
+
+  if(!loading.progress()){
+    clearInterval(si);
+  }
+
+},100);
+
 /**
  *  --> Public Method
  **/
@@ -54,6 +71,10 @@ var render = function (renderer) {
   loader.add(jsonResource, 'json')
     .add(pngResource, 'png')
     .load(function () {
+
+      loadingEle.remove();
+
+
       var counter = 0;
       world.reset();
 
