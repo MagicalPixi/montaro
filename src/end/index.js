@@ -71,18 +71,16 @@ var render = function (renderer, score, finish) {
 
 
     if(typeof wx !== 'undefined'){
-
+      var string = finish ? "并成功冲过所有关卡，" : "但是被撞飞了，"
       var config = {
-        title:text,
+        title:"我吃到了" + score + "颗星星，" + string + "快来和我一起玩吧!",
         desc:' ',
         link:location.href,
         imgUrl:'http://o8c60jr2y.bkt.clouddn.com/1/cat_share_icon.png',
         type:'link',
         success:function () {
-          alert('分享成功')
         },
         cancel:function () {
-          alert('分享成功')
         }
       }
 
