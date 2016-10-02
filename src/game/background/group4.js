@@ -76,8 +76,8 @@ function greenHillFn() {
 function bridgeFn() {
 
   var args = [{
-    'scale.x':0.3,
-    'scale.y':0.3
+    'scale.x':0.6,
+    'scale.y':0.6
   }]
 
   return [args,westLakeBridge]
