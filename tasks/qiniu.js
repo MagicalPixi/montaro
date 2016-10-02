@@ -4,7 +4,7 @@
 var path = require('path');
 var qnUpload = require('gulp-qiniu');
 
-var src = path.resolve(__dirname,'../images/**/*.png');
+var src = path.resolve(__dirname,'../images/wlBridge/wlBridge.png');
 
 var audioSrc = path.resolve(__dirname,'../public/audio/*');
 

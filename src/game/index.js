@@ -28,7 +28,7 @@ var jsonResource = [
     "platformChair",
     "westLakeBridgeWave",
     "westLakeBridgeApproache",
-    "westLakeBridge",
+    "wlBridge",
     "westLakeMansion",
     "building5",
     "building6",

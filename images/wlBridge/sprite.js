@@ -2,13 +2,13 @@ var pixiLib = require('pixi-lib');
 
 var args = [{
 
-  textures:pixiLib.getTextures('westLakeBridge'),
+  textures:pixiLib.getTextures('wlBridge'),
 
   
 
     
 
-    "spriteName" :  "westLakeBridge" ,
+    "spriteName" :  "wlBridge" ,
 
     
 
