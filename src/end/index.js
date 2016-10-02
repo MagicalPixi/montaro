@@ -74,7 +74,7 @@ var render = function (renderer, score, finish) {
       var string = finish ? "并成功冲过所有关卡，" : "但是被撞飞了，"
       var config = {
         title:"我吃到了" + score + "颗星星，" + string + "快来和我一起玩吧!",
-        desc:' ',
+        desc:"我吃到了" + score + "颗星星，" + string + "快来和我一起玩吧!",
         link:location.href,
         imgUrl:'http://o8c60jr2y.bkt.clouddn.com/1/cat_share_icon.png',
         type:'link',
