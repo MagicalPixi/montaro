@@ -18,9 +18,9 @@ var ajax = require('../lib/ajax');
 var render = function (renderer, score, finish) {
   score = score || 0
   if (!finish) {
-    var user = 'owuWAwWD7-YBp4Dl77zZcXmdQBnw'
+    var uid = wxUser.openid
 
-    ajax('/api/game/57d64d81300869c24a825bfd/user/' + user + '/score')
+    ajax('/api/game/r1UlZ06a/user/' + uid + '/score')
       .post({
       score: score
     }).then(function(response) {
